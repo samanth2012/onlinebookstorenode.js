@@ -17,7 +17,7 @@ Here are the instructions to be followed
 git clone https://github.com/samanth2012/onlinebookstorenode.js.git
 
 # Navigate to the project directory
-cd your-project
+cd onlinebookstorenode.js
 
 # Install dependencies
 npm install
@@ -27,7 +27,6 @@ Copy code
 # Run the application
 node index.js
 Features
-List the main features of my Node.js projet
 We can add books to cart
 We can buy the books
 We can upload our old books
