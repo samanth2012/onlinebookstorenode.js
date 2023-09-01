@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Book App - Sign In</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Sign In</h1>
+    <form id="signin-form">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+
+  <script src="./js/script.js"></script>
+  <script>
+    // Signin Form Submit
+    document.getElementById('signin-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const data = {
+        username: formData.get('username'),
+        password: formData.get('password'),
+      };
+
+      try {
+        await fetch(`${apiUrl}/signin`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+        .then(res => res.json())
+        .then(data => {
+          if(data['userId']){
+            userId= data['userId']
+            window.location.href = '/books.html';
+          }
+          else {
+          alert('Invalid credentials. Please try again.');
+          }
+        })
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again later.');
+      }
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Book App - Book Upload</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Book Upload</h1>
+    <form id="upload-form">
+      <input type="text" name="title" placeholder="Book Title" required>
+      <input type="url" name="imgurl" placeholder="Img URL" required>
+      <input type="text" name="author" placeholder="Author" required>
+      <input type="number" name="price" placeholder="Price" required>
+      <textarea name="description" placeholder="Description" required></textarea>
+      <input type="file" name="bookFile" accept=".pdf,.epub" required>
+      <button type="submit">Upload Book</button>
+    </form>
+  </div>
+
+  <!-- <script src="./js/script.js"></script> -->
+  <script>
+    const apiUrl = 'http://localhost:3000';
+    // Upload Form Submit
+    document.getElementById('upload-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const data = {
+        title: formData.get('title'),
+        imgurl: formData.get('imgurl'),
+        author: formData.get('author'),
+        price: formData.get('price'),
+        description: formData.get('description'),
+        bookFile: formData.get('bookFile'),
+      };
+      console.log(data)
+      try {
+        const response = await fetch(`${apiUrl}/upload`, {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          alert('Book uploaded successfully.');
+          e.target.reset();
+        } else {
+          alert('Failed to upload the book.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again later.');
+      }
+    });
+  </script>
+</body>
+
+</html>

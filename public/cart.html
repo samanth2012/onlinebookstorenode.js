@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Book App - Cart</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Online Book App</h1>
+    <nav>
+      <ul>
+        <li><a href="/upload.html">Upload</a></li>
+        <li><a href="/cart.html">Cart</a></li>
+        <li><a onclick="signout()">Signout</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="container">
+    <h1>Cart</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Book Title</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody id="cart-items"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2" class="total">Total: $<span id="total-value"></span></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="pay-now"><button onclick="payNow()">Pay Now</button></td>
+        </tr>
+      </tfoot>
+    </table>
+    <div id="payment-details"></div> <!-- Container to display the payment details -->
+  </div>
+
+  <script src="./js/script.js"></script>
+</body>
+
+</html>

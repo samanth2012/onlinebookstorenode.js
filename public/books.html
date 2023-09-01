@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Book App - Book Listing</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <!-- Application Header -->
+  <header>
+    <h1>Online Book App</h1>
+    <nav>
+      <ul>
+        <li><a href="/upload.html">Upload</a></li>
+        <li><a href="/cart.html">Cart</a></li>
+        <li><a onclick="signout()">Signout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="filter-section">
+    <button >Filter</button> 
+
+    <div id="filter" class="filter">
+      <h3>Filter</h3>
+
+      <div class="filter-group">
+        <h4>Sort By:</h4>
+        <div>
+          <input type="radio" id="latest" name="sort" value="latest">
+          <label for="latest">Latest</label>
+        </div>
+
+        <div>
+          <input type="radio" id="popular" name="sort" value="popular">
+          <label for="popular">Popular</label>  
+        </div>
+
+        <div>
+          <input type="radio" id="featured" name="sort" value="featured">
+          <label for="featured">Featured</label>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h4>Search:</h4>
+        <input type="text" id="search" placeholder="Search by name">
+      </div>
+
+      <div class="filter-group">
+        <h4>Price:</h4>
+        <input type="range" min="10" max="1000" value="10" id="price">
+        <span id="price-value">$10</span>
+      </div>
+
+      <div class="filter-group">
+        <h4>Rating:</h4> 
+        <input type="range" min="1" max="5" value="5" id="rating">
+        <span id="rating-value">5</span>
+      </div>
+
+      <button id="aply">Apply Filters</button>
+    </div>
+
+  </div>
+
+  <!-- Book Listing -->
+  <div class="container">
+    <h2>Book Listing</h2>
+    <div id="books-list"></div>
+  </div>
+
+  <footer>
+    <p>@ 2023 Online Book Store</p>
+  </footer>
+  <script src="./js/script.js"></script>
+  <script>
+    function signout() {
+      window.location.href = 'index.html';
+    }
+
+    // Get filter section and button
+const filterSection = document.querySelector('.filter-section');
+const filterBtn = filterSection.querySelector('button');
+const filterPanel = filterSection.querySelector('.filter');
+
+// Toggle filter on button click
+filterBtn.addEventListener('click', () => {
+  filterPanel.classList.toggle('show');
+});
+
+// Close filter on apply button click
+const applyBtn = document.querySelector('#aply');
+applyBtn.addEventListener('click', () => {
+  console.log('hello')
+  filterPanel.classList.remove('show');  
+});
+
+// Filter book list 
+function filterBooks(books) {
+
+  let filteredBooks = books;
+
+  // Filter by search term
+  if (searchTerm) {
+    filteredBooks = filteredBooks.filter(book => 
+      book.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  // Filter by price
+  if (minPrice) {
+    filteredBooks = filteredBooks.filter(book => 
+      book.price >= minPrice
+    );
+  }
+
+  // Filter by rating
+  if (rating) {
+    filteredBooks = filteredBooks.filter(book =>
+      book.rating >= rating
+    ); 
+  }
+
+  // Sort books
+  if (sortBy === 'latest') {
+    filteredBooks.sort((a, b) => b.date - a.date);
+  } else if (sortBy === 'popular') {
+    filteredBooks.sort((a, b) => b.sales - a.sales); 
+  }
+
+  return filteredBooks
+}
+
+// Get filter values on apply
+applyBtn.addEventListener('click', () => {
+  const sortBy = document.querySelector('input[name="sort"]:checked').value;
+  const searchTerm = document.getElementById('search').value;
+  const minPrice = document.getElementById('price').value;
+  const rating = document.getElementById('rating').value;
+
+  const response =  fetch(`${apiUrl}/books`);
+  const books =  response.json();
+  filterBooks(books)
+  filterPanel.classList.remove('show');
+});
+
+  </script>
+</body>
+
+</html>
