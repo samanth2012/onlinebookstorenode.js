@@ -6,24 +6,21 @@ A brief description of Simple online bookstore.
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
 - [Features](#features)
 
 ## Installation
 
-Provide instructions on how to install and set up your Node.js project. Include any prerequisites, if necessary. You can also include code examples here.
+Here are the instructions to be followed
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/your-project.git
+git clone https://github.com/samanth2012/onlinebookstorenode.js.git
 
 # Navigate to the project directory
 cd your-project
 
 # Install dependencies
 npm install
-Usage
-Explain how to use your Node.js application. Provide code snippets or examples if applicable.
 
 bash
 Copy code
