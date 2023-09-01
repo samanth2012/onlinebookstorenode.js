@@ -28,7 +28,7 @@ Explain how to use your Node.js application. Provide code snippets or examples i
 bash
 Copy code
 # Run the application
-npm start
+node index.js
 Features
 List the main features of my Node.js projet
 We can add books to cart
