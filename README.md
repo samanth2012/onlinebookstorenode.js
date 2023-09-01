@@ -1,4 +1,4 @@
-# onlinebookstorenode.js
+
 # Simple Online Bookstore
 
 A brief description of Simple online bookstore.
